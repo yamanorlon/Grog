@@ -1,0 +1,169 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: grog-postgres
+    environment:
+      POSTGRES_DB: grog_db
+      POSTGRES_USER: grog_user
+      POSTGRES_PASSWORD: grog_password_secure_123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U grog_user -d grog_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - grog-network
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: grog-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - grog-network
+    restart: unless-stopped
+
+  # Keycloak Authentication
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    container_name: grog-keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin_password_secure_123
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: keycloak_password_secure_123
+      KC_HTTP_ENABLED: "true"
+    command: start-dev
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    ports:
+      - "8180:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080;echo -e \"GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\n\\r\\n\" >&3;grep \"HTTP/1.1 200 OK\" <&3"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - grog-network
+    restart: unless-stopped
+
+  # OpenSearch (Logging & Monitoring)
+  opensearch:
+    image: opensearchproject/opensearch:2.11.0
+    container_name: grog-opensearch
+    environment:
+      - discovery.type=single-node
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=AdminPassword123!
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -k -u admin:AdminPassword123! https://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - grog-network
+    restart: unless-stopped
+
+  # OpenSearch Dashboards
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.11.0
+    container_name: grog-opensearch-dashboards
+    environment:
+      - OPENSEARCH_HOSTS=["https://opensearch:9200"]
+    ports:
+      - "5601:5601"
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    networks:
+      - grog-network
+    restart: unless-stopped
+
+  # Grog Application
+  grog-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grog-app
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/grog_db
+      SPRING_DATASOURCE_USERNAME: grog_user
+      SPRING_DATASOURCE_PASSWORD: grog_password_secure_123
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: grog-realm
+      KEYCLOAK_CLIENT_ID: grog-client
+      KEYCLOAK_CLIENT_SECRET: grog-secret
+      OPENSEARCH_HOST: opensearch
+      OPENSEARCH_PORT: 9200
+      OPENSEARCH_USERNAME: admin
+      OPENSEARCH_PASSWORD: AdminPassword123!
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - grog-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  keycloak_data:
+    driver: local
+  opensearch_data:
+    driver: local
+
+networks:
+  grog-network:
+    driver: bridge
