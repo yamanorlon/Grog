@@ -1,0 +1,161 @@
+<mxGraphModel dx="1426" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- Frontend -->
+    <mxCell id="frontend" value="Frontend&#xa;(React/Vue.js + TypeScript)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="480" y="40" width="200" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- API Gateway / Controller Layer -->
+    <mxCell id="controller" value="API Gateway / Controller Layer&#xa;(Spring MVC REST Controllers)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="480" y="140" width="200" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- Service Layer -->
+    <mxCell id="service" value="Service Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="480" y="240" width="200" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- Product Service -->
+    <mxCell id="productService" value="Product Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="320" y="340" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Engagement Service -->
+    <mxCell id="engagementService" value="Engagement Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="480" y="340" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Finding Service -->
+    <mxCell id="findingService" value="Finding Service + Parsers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="640" y="340" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Repository Layer -->
+    <mxCell id="repository" value="Repository Layer&#xa;(Spring Data JPA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="480" y="430" width="200" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- PostgreSQL -->
+    <mxCell id="postgres" value="PostgreSQL&#xa;(Database)" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="280" y="530" width="100" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- Redis -->
+    <mxCell id="redis" value="Redis&#xa;(Cache)" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="480" y="530" width="100" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- External Services -->
+    <mxCell id="external" value="External Services&#xa;(GitLab, Jira, LDAP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+      <mxGeometry x="680" y="530" width="140" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- Keycloak -->
+    <mxCell id="keycloak" value="Keycloak&#xa;(Auth)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="80" y="240" width="100" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- OpenSearch -->
+    <mxCell id="opensearch" value="OpenSearch&#xa;(Logging &amp; Monitoring)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="80" y="340" width="120" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- Arrows -->
+    <mxCell id="arrow1" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="frontend" target="controller">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="120" as="sourcePoint"/>
+        <mxPoint x="580" y="140" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="arrow2" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="controller" target="service">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="220" as="sourcePoint"/>
+        <mxPoint x="580" y="240" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="arrow3" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="service" target="repository">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="320" as="sourcePoint"/>
+        <mxPoint x="580" y="430" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="arrow4" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="repository">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="510" as="sourcePoint"/>
+        <mxPoint x="530" y="530" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="arrow5" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="redis">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="510" as="sourcePoint"/>
+        <mxPoint x="530" y="530" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="arrow6" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="external">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="630" y="510" as="sourcePoint"/>
+        <mxPoint x="750" y="530" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="keycloakArrow" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="keycloak" target="controller">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="270" as="sourcePoint"/>
+        <mxPoint x="480" y="170" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="opensearchArrow" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="opensearch">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="200" y="370" as="sourcePoint"/>
+        <mxPoint x="480" y="370" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Title -->
+    <mxCell id="title" value="Grog Application Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="10" width="200" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- Legend -->
+    <mxCell id="legend" value="Legend:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="430" width="80" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="legend1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="80" y="460" width="20" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend1Text" value="Frontend" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="110" y="460" width="100" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="legend2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+      <mxGeometry x="80" y="490" width="20" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend2Text" value="API Layer" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="110" y="490" width="100" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="legend3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="80" y="520" width="20" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend3Text" value="Service" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="110" y="520" width="100" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="legend4" value="" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="80" y="550" width="20" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend4Text" value="Database/Cache" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="110" y="550" width="100" height="20" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>
