@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: Vulnerability Manager API
+  version: 1.0.0
+  description: REST API for managing products, engagements, and security findings.
+servers:
+  - url: http://localhost:8080
+components:
+  schemas: {}
+paths:
+  /api/products:
+    get:
+      summary: List products
+      tags: [Products]
+    post:
+      summary: Create product
+      tags: [Products]
+  /api/products/{id}:
+    get:
+      summary: Get product by id
+      tags: [Products]
+    put:
+      summary: Update product
+      tags: [Products]
+    delete:
+      summary: Delete product
+      tags: [Products]
+  /api/engagements:
+    get:
+      summary: List engagements
+      tags: [Engagements]
+    post:
+      summary: Create engagement
+      tags: [Engagements]
+  /api/engagements/{id}:
+    get:
+      summary: Get engagement by id
+      tags: [Engagements]
+    put:
+      summary: Update engagement
+      tags: [Engagements]
+    delete:
+      summary: Delete engagement
+      tags: [Engagements]
+  /api/findings:
+    get:
+      summary: List findings
+      tags: [Findings]
+    post:
+      summary: Create finding
+      tags: [Findings]
+  /api/findings/{id}:
+    get:
+      summary: Get finding by id
+      tags: [Findings]
+    put:
+      summary: Update finding
+      tags: [Findings]
+    delete:
+      summary: Delete finding
+      tags: [Findings]

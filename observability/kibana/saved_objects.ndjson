@@ -1,0 +1,2 @@
+{"attributes":{"fieldAttrs":"{}","fieldFormatMap":"{}","fields":"[]","name":"vulnerability-manager-logs-*","runtimeFieldMap":"{}","sourceFilters":"[]","timeFieldName":"timestamp","title":"vulnerability-manager-logs-*","typeMeta":"{}"},"coreMigrationVersion":"8.8.0","created_at":"2026-06-16T00:00:00.000Z","id":"vulnerability-manager-logs","managed":false,"references":[],"type":"index-pattern","updated_at":"2026-06-16T00:00:00.000Z","version":"WzEsMV0="}
+{"excludedObjects":[],"excludedObjectsCount":0,"exportedCount":1,"missingRefCount":0,"missingReferences":[]}

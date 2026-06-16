@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: Vulnerability Manager
+    orgId: 1
+    folder: Vulnerability Manager
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards
