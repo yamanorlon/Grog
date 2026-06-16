@@ -38,3 +38,11 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### My ###
+
+Makefile
+docs
+performance
+reports
+scripts

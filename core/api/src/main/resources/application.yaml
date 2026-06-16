@@ -1,0 +1,29 @@
+ktor:
+  application:
+    modules:
+      - com.yamanorlon.grog.ApplicationKt.module
+  deployment:
+    port: 8080
+    host: 0.0.0.0
+
+app:
+  database:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/vulnmanager}
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    poolSize: ${DB_POOL_SIZE:10}
+  request:
+    maxSizeBytes: ${REQUEST_MAX_SIZE_BYTES:1048576}
+  openapi:
+    outputDir: ${OPENAPI_OUTPUT_DIR:./docs}
+  logs:
+    dir: ${LOGS_DIR:./logs}
+  observability:
+    serviceName: ${SERVICE_NAME:vulnerability-manager}
+    environment: ${ENV:local}
+    logstash:
+      enabled: ${LOGSTASH_ENABLED:false}
+      host: ${LOGSTASH_HOST:localhost}
+      port: ${LOGSTASH_PORT:5044}
+    metrics:
+      enabled: ${METRICS_ENABLED:true}

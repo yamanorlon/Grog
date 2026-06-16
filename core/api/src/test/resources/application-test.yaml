@@ -1,0 +1,22 @@
+ktor:
+  deployment:
+    port: 8080
+    host: 0.0.0.0
+
+app:
+  database:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/vulnmanager}
+    user: ${TEST_DB_USER:postgres}
+    password: ${TEST_DB_PASSWORD:postgres}
+    poolSize: 5
+  openapi:
+    outputDir: ${TEST_OPENAPI_DIR:./build/test-docs}
+  logs:
+    dir: ${TEST_LOGS_DIR:./build/test-logs}
+  observability:
+    serviceName: vulnerability-manager-test
+    environment: test
+    logstash:
+      enabled: false
+    metrics:
+      enabled: false
